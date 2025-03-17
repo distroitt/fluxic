@@ -29,7 +29,5 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana
-        namespace: monitoring
-      valuesFiles:
-        - lokik.yaml                                                                                       
+        namespace: monitoring                                                                                    
       interval: 1m

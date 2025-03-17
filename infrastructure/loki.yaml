@@ -87,28 +87,21 @@ spec:
       replicas: 1
 ---
 apiVersion: v1
-data:
-  datasource.yaml: "apiVersion: 1\ndatasources: \n  - access: proxy\n    isDefault:
-    true\n    name: VictoriaMetrics\n    type: prometheus\n    url: http://vmsingle-vmks-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:8429\n
-    \ - access: proxy\n    jsonData:\n      implementation: prometheus\n    name:
-    Alertmanager\n    type: alertmanager\n    url: http://vmalertmanager-vmks-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:9093"
 kind: ConfigMap
 metadata:
-  annotations:
-    meta.helm.sh/release-name: vmks
-    meta.helm.sh/release-namespace: monitoring
-  creationTimestamp: "2025-03-01T17:21:26Z"
   labels:
-    app: victoria-metrics-k8s-stack-grafana
-    app.kubernetes.io/instance: vmks
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: victoria-metrics-k8s-stack
-    app.kubernetes.io/version: v1.113.0
+    namespace: default
     grafana_datasource: "1"
-    helm.sh/chart: victoria-metrics-k8s-stack-0.39.0
-    helm.toolkit.fluxcd.io/name: vmks
-    helm.toolkit.fluxcd.io/namespace: monitoring
-  name: vmks-victoria-metrics-k8s-stack-grafana-dsssss
-  namespace: monitoring
-  resourceVersion: "49772404"
-  uid: 684f7c3a-e325-4fd0-bdd8-dbef4398e3fc
+  name: lokiafa
+data:
+  loki-stack-datasource.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: "http://loki-gateway.monitoring"
+      version: 1
+      isDefault: true
+      jsonData:
+        {}

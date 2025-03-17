@@ -77,4 +77,13 @@ spec:
         retention_delete_delay: 2h
         retention_delete_worker_count: 150
         delete_request_store: s3
+    minio:
+      enabled: false
+    deploymentMode: SimpleScalable
+    backend:
+      replicas: 1
+    read:
+      replicas: 1
+    write:
+      replicas: 1
             

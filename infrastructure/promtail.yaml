@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+  labels:
+    toolkit.fluxcd.io/tenant: sre
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  interval: 24h
+  url: https://grafana.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: promtail
+  namespace: monitoring
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: promtail
+      version: "*"
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: monitoring                                                                                    
+      interval: 1m
+  values:
+    config:
+      clients:
+        - url: http://loki-gateway.logging.svc.cluster.local/loki/api/v1/push

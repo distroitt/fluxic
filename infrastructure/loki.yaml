@@ -65,8 +65,8 @@ spec:
         s3:
           endpoint: http://minio:9000
           region: eu-west-2
-          secretAccessKey: minioadmin
-          accessKeyId: minioadmin
+          secretRef:
+            name: gorda
           s3ForcePathStyle: true
           insecure: true
           http_config: {}

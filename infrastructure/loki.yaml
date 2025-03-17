@@ -65,8 +65,13 @@ spec:
         s3:
           endpoint: http://minio:9000
           region: eu-west-2
-          secretAccessKey: ${LOKI_SECRET_ACCESS_KEY}
-          accessKeyId: ${LOKI_ACCESS_KEY_ID}
+          secretRef:
+            secretAccessKey:
+              name: gorda
+              key: secretAccessKey
+            accessKeyId:
+              name: gorda
+              key: accessKeyId
           s3ForcePathStyle: true
           insecure: true
           http_config: {}
@@ -85,14 +90,5 @@ spec:
       replicas: 1
     write:
       replicas: 1
-  valuesFrom:
-    - kind: Secret
-      name: gorda
-      valuesKey: accessKeyId
-      targetPath: loki.storage.s3.accessKeyId
-    - kind: Secret
-      name: gorda
-      valuesKey: secretAccessKey
-      targetPath: loki.storage.s3.secretAccessKey
 
 

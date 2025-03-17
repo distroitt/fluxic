@@ -108,7 +108,7 @@ metadata:
     helm.sh/chart: victoria-metrics-k8s-stack-0.39.0
     helm.toolkit.fluxcd.io/name: vmks
     helm.toolkit.fluxcd.io/namespace: monitoring
-  name: vmks-victoria-metrics-k8s-stack-grafana-ds
+  name: vmks-victoria-metrics-k8s-stack-grafana-dsssss
   namespace: monitoring
   resourceVersion: "49772404"
   uid: 684f7c3a-e325-4fd0-bdd8-dbef4398e3fc

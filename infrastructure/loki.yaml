@@ -92,7 +92,7 @@ metadata:
   labels:
     namespace: monitoring
     grafana_datasource: "1"
-  name: loki
+  name: lokiok
 data:
   loki-stack-datasource.yaml: |-
     apiVersion: 1

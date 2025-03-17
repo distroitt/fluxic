@@ -13,9 +13,9 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana
-        namespace: monitoring                                                                                    
+        namespace: monitoring                                                                               
       interval: 1m
   values:
     config:
       clients:
-        - url: http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push
+        - url: http://loki-gateway/loki/api/v1/push

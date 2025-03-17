@@ -55,8 +55,7 @@ spec:
       limits_config:
         allow_structured_metadata: true
         volume_enabled: true
-        retention_period: 672h # 28 days retention
-
+        retention_period: 672h
       storage:
         type: s3
         bucketNames:

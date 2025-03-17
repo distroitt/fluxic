@@ -21,7 +21,7 @@ metadata:
   name: loki
   namespace: monitoring
 spec:
-  interval: 30m
+  interval: 1m
   chart:
     spec:
       chart: loki
@@ -30,4 +30,4 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: monitoring                                                                                       
-      interval: 12h
+      interval: 1m

@@ -15,16 +15,6 @@ spec:
   interval: 24h
   url: https://grafana.github.io/helm-charts
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: minio-credentials
-  namespace: monitoring
-type: Opaque
-data:
-  accessKeyId: bWluaW9hZG1pbmlv  # Значение закодировано в base64 (например, "minioadmin")
-  secretAccessKey: bWluaW9hZG1pbmlv  # Значение закодировано в base64 (например, "minioadmin")
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -75,20 +65,11 @@ spec:
         s3:
           endpoint: http://minio:9000
           region: eu-west-2
-          secretAccessKey: {{ .Values.secrets.secretAccessKey }}
-          accessKeyId: {{ .Values.secrets.accessKeyId }}
+          secretRef:
+            name: gorda
           s3ForcePathStyle: true
           insecure: true
           http_config: {}
-    secrets:
-      accessKeyId: 
-        secretKeyRef:
-          name: minio-credentials
-          key: accessKeyId
-      secretAccessKey:
-        secretKeyRef:
-          name: minio-credentials
-          key: secretAccessKey
       compactor:
         compaction_interval: 10m
         retention_enabled: true
@@ -104,4 +85,5 @@ spec:
       replicas: 1
     write:
       replicas: 1
+
 

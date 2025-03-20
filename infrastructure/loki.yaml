@@ -51,6 +51,15 @@ spec:
         name: grafana
         namespace: monitoring                                                                                    
       interval: 1m
+  valuesFrom:
+    - kind: Secret
+      name: minio-credentials
+      valuesKey: accessKeyId
+      targetPath: loki.storage.s3.accessKeyId
+    - kind: Secret
+      name: minio-credentials
+      valuesKey: secretAccessKey
+      targetPath: loki.storage.s3.secretAccessKey
   values:
     loki:
       auth_enabled: false
@@ -85,8 +94,6 @@ spec:
         s3:
           endpoint: http://minio.default:9000
           region: eu-west-2
-          secretAccessKey: minioadmin
-          accessKeyId: minioadmin
           s3ForcePathStyle: true
           insecure: true
           http_config: {}

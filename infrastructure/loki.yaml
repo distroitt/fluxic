@@ -6,6 +6,26 @@ metadata:
   labels:
     toolkit.fluxcd.io/tenant: sre
 ---
+apiVersion: v1
+data:
+  loki-stack-datasource.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: "http://loki-gateway"
+      version: 1
+      jsonData:
+        {}
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: grafana  
+    grafana_datasource: "1"
+  name: loki
+  namespace: monitoring
+---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
